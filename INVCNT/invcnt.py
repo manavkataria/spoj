@@ -9,7 +9,7 @@ Designed as a reusable template for all programs
 
 import logging
 
-DEBUG = False
+DEBUG = True
 
 def process(N, data):
     for i in range(0,N):
@@ -18,19 +18,33 @@ def process(N, data):
         else:
             return
 
+def read_array(n):
+    arr = []
+    element = 0
+    for i in range(0,n):
+        element = input()
+        logging.debug('arr[%d]=(%d)', i, element)
+        if (element): arr.append(element)
+        else: pass
+
+    return [n, arr]
+
 def read_inputs():
     data = []
+    x = 0
     N = 0
 
     N = input()
-    logging.debug('N: %d', N)
+    logging.debug('N Arrays: %d', N)
 
     for i in range(0,N):
         logging.debug('i: %d', i)
 
+        x = raw_input() #eat EOF caused by New Line
         x = input()
+        logging.debug('x(%d) elements', x)
 
-        if (x): data.append(x)
+        if (x): data.append(read_array(x))
         else: pass
 
     return [N, data]
