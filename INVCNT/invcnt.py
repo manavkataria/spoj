@@ -9,12 +9,11 @@ Designed as a reusable template for all programs
 
 import logging
 
-DEBUG = True
+DEBUG = False
 
 def countInvMerge(array, start, middle, end):
-    logging.debug('Merge array:')
-    logging.debug(array)
     logging.debug('Merge: start %d, middle %d, end %d', start, middle, end)
+    logging.debug(array[start:end+1])
 
     tmpArray = []
 
@@ -47,14 +46,16 @@ def countInvMerge(array, start, middle, end):
 
 
 def countInvSplit(array, start, end):
-    logging.debug('Split array:')
-    logging.debug(array)
     logging.debug('Split: start %d, end %d', start, end)
+    logging.debug(array[start:end+1])
+
+    middle = (start+end)/2
+
     if ((end-start+1) <= 1): return 0
     else:
-        cl = countInvSplit(array, start, end/2)
-        cr = countInvSplit(array, end/2+1, end)
-        cm = countInvMerge(array, start, end/2, end)
+        cl = countInvSplit(array, start, middle)
+        cr = countInvSplit(array, middle+1, end)
+        cm = countInvMerge(array, start, middle, end)
 
         logging.debug('cr(%d), cl(%d), cm(%d), sum(%d)', cr, cl, cm, cr+cl+cm)
 
@@ -65,12 +66,12 @@ def process(N, data):
     DEBUG = True
 
     for i in range(0,N):
-        logging.info('Processing Array:')
-        logging.info(data[i])
+        logging.debug('Processing Array:')
+        logging.debug(data[i])
 
-        result = countInvSplit(data[i][1],0,data[i][0])
+        result = countInvSplit(data[i][1], 0, data[i][0]-1)
 
-        print('InvCount: %d' % result)
+        logging.info(result)
 
 
 def read_array(n):
