@@ -1,4 +1,7 @@
 #!/bin/bash
+# Usage: 
+# cd ./INVCNT/ (directory containg source-code)
+# ../myUnit.sh invcnt.py
 
 echo "== Running Tests =="
 
